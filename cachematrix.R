@@ -1,33 +1,33 @@
-## Processing Matrix Inverses can ressource intensive. These 2 functions define a new matrix object which  
-## allows for its inverse to cached. These function assume that the matrix is invertible 
+## Processing Matrix Inverses can be ressource intensive. These 2 functions define a new matrix object which  
+## allows for its inverse to be cached. These functions assume that the initial matrix is invertible 
 
-## makeCacheMatrix defines a new matrix object and its 4 functions to handle it
+## makeCacheMatrix defines a new 'makeCacheMatrix' matrix object, its paramerts and its 4 functions to handle it
 makeCacheMatrix <- function(x = matrix()) {
     inv <- NULL
     
-    # define/assign a new matrix to our new matrix object
+    # Define/assign a new matrix to the 'makeCacheMatrix' object
     set <- function(y) {
         x <<- y
         inv <<- NULL
     }
     
-    # Return/display the matrix stored in the new matrix object
+    # Return/display the matrix stored in the 'makeCacheMatrix' object
     get <- function() x
     
-    # Sets the inverse parameter of the new matrix object
+    # Sets the inverse parameter of the 'makeCacheMatrix' object
     setinverse <- function(inverse) inv <<- inverse
     
-    # Return/Display the inverse parameter of the new matrix object
+    # Return/Display the inverse parameter of the 'makeCacheMatrix' object
     getinverse <- function() inv
     
-    # Return the new matrix object as a list of 4 functions
+    # Return the 'makeCacheMatrix' object as a list of 4 functions
     list(set = set, get = get,
          setinverse = setinverse,
          getinverse = getinverse)
 }
 
 
-## Given a object returned by the makeCacheMatrix function, process the inverse of the matrix, cache it and returns it
+## Given an object returned by the makeCacheMatrix function, process the inverse of the matrix, cache it and returns it
 cacheSolve <- function(x, ...) {
     
     ## Get the inverse parameter of the 'makeCacheMatrix' object 
@@ -39,7 +39,7 @@ cacheSolve <- function(x, ...) {
         return(inv)
     }
     
-    #otherwise process the matrix inverse, cache it in the 'makeCacheMatrix' object and return it
+    # otherwise process the matrix inverse, cache it in the 'makeCacheMatrix' object and return it
     data <- x$get()
     inv <- solve(data, ...)
     x$setinv(inv)
